@@ -1,0 +1,30 @@
+{% extends "base.html" %} 
+{% block title %} Последние обновления {% endblock %}
+
+{% block content %}
+    <div class="container">
+
+        <!-- Переключатель записей index и follow -->
+        {% include "includes/menu.html" with index=True %}
+
+        <!-- Вывод ленты записей -->
+
+        {% if search_query %} 
+            <h1>Статьи с запросом: <strong>"{{search_query}}"</strong></h1>
+            {% for post in posts %}
+                {% include "includes/search_result.html" %}
+            {% endfor %}
+        {% else %}
+            <h1> Последние обновления на сайте</h1>
+            {% for post in page %}
+                {% include "includes/post_item.html" %}
+            {% endfor %}
+        {% endif %}
+    </div>
+
+    <!-- Вывод паджинатора -->
+    {% if page.has_other_pages %}
+        {% include "includes/paginator.html" with items=page paginator=paginator%}
+    {% endif %}
+
+{% endblock %}

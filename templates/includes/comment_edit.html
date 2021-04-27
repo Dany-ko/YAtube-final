@@ -1,0 +1,29 @@
+{% load user_filters %}
+
+<div id="edit_comment_{{ form.instance.id }}" aria-hidden="true" class="modal fade" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+            </div>
+            <div class="modal-body">            
+                <div class="card my-4">
+                    <form method="post" action="{% url 'comment_edit' post.author.username post.id form.instance.id %}" 
+                    id="edit_comment_form_{{ form.instance.id }}">
+                        {% csrf_token %}
+                        <h5 class="card-header">Редактировать комментарий:</h5>
+                        <div class="card-body">
+                            <div class="form-group" input type='textarea'>
+                                {{ form.text|addclass:'form-control' }}
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                <button type="submit" form="edit_comment_form_{{form.instance.id}}" class="btn btn-primary">Сохранить</button>
+            </div>
+        </div>
+    </div>
+</div>

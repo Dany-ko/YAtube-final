@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}
+    {% if not author.get_full_name %}
+        {{author.username}} - личная страница
+    {% else %}
+        {{author.get_full_name}} - личная страница
+    {% endif %}
+{% endblock %}
+{% block header %} {% endblock %}
+{% block content %}
+
+<main role="main" class="container">
+    <div class="row">
+        <div class="col-md-3 mb-3 mt-1">
+
+            {% include 'includes/user_card.html' %}            
+            {% include 'includes/follow_to_user.html' %}
+
+        </div>
+        <div class="col-md-9">     
+
+            {% for post in page %}
+                {% include 'includes/user_post.html' %}
+            {% endfor %}
+
+            {% if page.has_other_pages %}
+                {% include 'includes/paginator.html' with items=page paginator=paginator %}
+            {% endif %}
+
+        </div>
+    </div>
+</main> 
+
+{% endblock %}

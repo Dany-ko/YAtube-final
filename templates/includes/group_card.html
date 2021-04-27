@@ -1,0 +1,31 @@
+{% load thumbnail %}
+<div class="card">
+    <div class="card-body">
+        <div class="h1" style="margin-bottom: 60px;">
+            {{ group.title }}
+        </div>
+        <div class="h3 text-muted">
+            <h5>Администратор:</h5>
+            <a href="{% url 'profile' group.author.username %}">
+                @{{ group.author }}
+            </a>
+        </div>
+    </div>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+            <div class="h6 text-muted">
+                Подписчиков: XXX <br />
+            </div>
+        </li>
+        <li class="list-group-item">
+            <div class="h6 text-muted">
+                Записей: XXX
+            </div>
+            {% if user == group.author %}
+                <a class="btn btn-info" href="{% url 'group_edit' group.slug %}" role="button" style="margin-left: 5px;">
+                    Редактировать группу
+                </a>
+            {% endif %}
+        </li>
+    </ul>
+</div>

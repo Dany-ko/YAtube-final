@@ -1,0 +1,37 @@
+<div id="myFollower" aria-hidden="true" class="modal fade" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+            </div>
+            <div class="modal-body">            
+                <div class="card my-4">
+                    <form id="myFollower">
+                        <h5 class="card-header">Ваши подписки:</h5>
+                        <div class="card-body">
+                            <div class="form-group" input type='textarea'>
+                                {% if author.follower.count <= 0 %}
+                                    {% if user.username == author.username %}
+                                        <h5>Вы ни на кого не подписаны.
+                                        <br>Скорее это исправьте - <a href="{% url 'index' %}">перейдите на главную страницу</a> и выберите понравившегося автора.</h5>
+                                    {% else %}
+                                        <h5>У этого автора нет подписок.</h5>
+                                    {% endif %}
+                                {% else %}
+                                    {% for follower in author.follower.all %}
+                                        <a href="{% url 'profile' follower.author.username %}">
+                                            <li style="display: block;">{{ follower.author.username }}</li>
+                                        </a>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,38 @@
+<div id="myFollowing" aria-hidden="true" class="modal fade" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+            </div>
+            <div class="modal-body">            
+                <div class="card my-4">
+                    <form id="myFollowing">
+                        <h5 class="card-header">Ваши подписчики:</h5>
+                        <div class="card-body">
+                            <div class="form-group" input type='textarea'>
+                                {% if author.following.count <= 0 %}
+                                    {% if user.username == author.username %}
+                                        <h5>У вас нет подписчиков.<br>
+                                            Видимо надо пересмотреть свой стиль написания и стать еще интереснее вашиму будущему подписчику.
+                                        </h5>
+                                    {% else %}
+                                        <h5>У этого автора нет подписчиков.</h5>
+                                    {% endif %}
+                                {% else %}
+                                    {% for following in author.following.all %}
+                                        <a href="{% url 'profile' following.user.username %}">
+                                            <li style="display: block;">@{{ following.user.username }}</li>
+                                        </a>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+            </div>
+        </div>
+    </div>
+</div>

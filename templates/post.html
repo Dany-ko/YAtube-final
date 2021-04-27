@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+<!-- Временно id поста - должно быть {{post.title}}, но его нет в базе -->
+{% block title %}
+    {% if not author.get_full_name %}
+        {{post.id}} | {{author.username}}
+    {% else %}
+        {{post.id}} | {{author.get_full_name}}
+    {% endif %}
+{% endblock %}
+{% block header %} {% endblock %}
+{% block content %}
+
+<main role="main" class="container">
+    <div class="row">
+        <div class="col-md-3 mb-3 mt-1">
+
+            {% include 'includes/user_card.html' %}
+
+        </div>
+        <div class="col-md-9">  
+
+            {% include 'includes/user_post.html' %}
+            {% include 'includes/comments.html' %}
+            
+        </div>
+    </div>
+</main>
+
+{% endblock %}

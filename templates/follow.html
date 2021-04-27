@@ -1,0 +1,30 @@
+{% extends "base.html" %} 
+{% block title %}
+    {% if not user.get_full_name %}
+        Лента {{ user }}
+    {% else %}
+        Лента {{ user.get_full_name }}
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+
+        <!-- Переключатель записей index и follow -->
+        {% include "includes/menu.html" with follow=True %}
+
+         <h1> Последние обновления вашей ленты</h1>
+        <!-- Вывод ленты записей -->
+
+            {% for post in page %}
+                {% include "includes/post_item.html" %}
+            {% endfor %}
+
+    </div>
+
+    <!-- Вывод паджинатора -->
+    {% if page.has_other_pages %}
+        {% include "includes/paginator.html" with items=page paginator=paginator%}
+    {% endif %}
+
+{% endblock %}

@@ -1,0 +1,15 @@
+<li class="list-group-item" style="text-align: center;">
+    {% if following %}
+    <a class="btn btn-lg btn-light" 
+            href="{% url 'profile_unfollow' author.username %}" role="button"> 
+            Отписаться 
+    </a> 
+    {% elif author == user %}
+        <p>Мы не нарцисы, не стоит подписываться на себя)</p>
+    {% else %}
+    <a class="btn btn-lg btn-primary" 
+            href="{% url 'profile_follow' author.username %}" role="button">
+    Подписаться 
+    </a>
+    {% endif %}
+</li> 
